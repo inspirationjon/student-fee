@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1 class="header_heading">University Student fee</h1>
+    </header>
+
+    <div class="navbar">
+      <a class="nav__link" href="/">Home</a>
+      <a class="nav__link" href="/payment">Payment</a>
+    </div>
+    <div class="details__wrapper">
+      <h2 class="details__heading">Check:</h2>
+      <ul>
+        <% db.forEach(item => {%>
+        <li class="details__item">
+          <p>
+            <span class="details__span">Student name: </span><%=
+            item.student_name %>
+          </p>
+          <p>
+            <span class="details__span">Student faculty: </span> <%=
+            item.faculty %>
+          </p>
+          <p>
+            <span class="details__span">Student grade: </span> <%= item.grade %>
+          </p>
+          <p>
+            <span class="details__span">Total amount: </span> <%= item.payment
+            %>
+          </p>
+          <button class="details__edit__button" type="button">
+            <span class="btn__content">Edit</span>
+            <img src="/images/pencil.png" alt="edit icon" width="15" />
+          </button>
+
+          <form class="detail_form" action="/delete" method="post">
+            <button class="details__delete__button" type="submit">
+              <span class="btn__content">Delete</span>
+              <img src="/images/bin.png" alt="delete icon" width="15" />
+            </button>
+          </form>
+        </li>
+        <% })%>
+      </ul>
+
+      <div id="details_box" class="details_box">
+        <form class="modal__form" action="/change" method="post">
+          <input
+            class="form__input"
+            type="text"
+            name="new_name"
+            placeholder="change name"
+            required
+          />
+          <select class="form__select" name="new_faculty" id="faculty" required>
+            <option value="" selected disabled hidden>new_faculty</option>
+            <option value="Business & Economics">Business & Economics</option>
+            <option value="Law, Technology & Education">
+              Law, Technology & Education
+            </option>
+            <option value="Digital marketing">Digital marketing</option>
+          </select>
+          <input
+            class="form__input"
+            type="number"
+            name="new_grade"
+            placeholder="change grade"
+            required
+          />
+          <input
+            class="form__input"
+            type="number"
+            name="new_total"
+            placeholder="change total money"
+            required
+          />
+
+          <button class="form__btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="/javascript/index.js"></script>
+</html>
